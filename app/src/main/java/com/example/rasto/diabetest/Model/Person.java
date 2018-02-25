@@ -1,4 +1,4 @@
-package com.example.rasto.diabetest.Person;
+package com.example.rasto.diabetest.Model;
 
 import java.util.UUID;
 
