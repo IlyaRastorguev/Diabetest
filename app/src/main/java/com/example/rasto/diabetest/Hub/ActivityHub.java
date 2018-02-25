@@ -1,4 +1,4 @@
-package com.example.rasto.diabetest;
+package com.example.rasto.diabetest.Hub;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.rasto.diabetest.R;
+
+public class ActivityHub extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
