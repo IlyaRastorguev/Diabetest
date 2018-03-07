@@ -1,16 +1,24 @@
 <resources>
-
+    <attr name="main_background" format="reference" />
+    <attr name="main_button_background" format="reference" />
+    <attr name="main_input_background" format="reference" />
+    <attr name="main_circle_background" format="reference" />
+    <attr name="main_block_background" format="reference" />
+    <attr name="main_text_field_background" format="reference" />
+    <attr name="main_app_bar_background" format="reference" />
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="main_background">@drawable/app_background</item>
+        <item name="main_button_background">@drawable/button_background</item>
+        <item name="main_input_background">@drawable/input_background</item>
+        <item name="main_circle_background">@drawable/circle_background</item>
+        <item name="main_block_background">@drawable/block_background</item>
+        <item name="main_text_field_background">@drawable/text_field_background</item>
+        <item name="main_app_bar_background">@drawable/app_bar_background</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -1,5 +1,7 @@
 package com.example.rasto.diabetest.Model;
 
+import android.util.Base64;
+
 import java.util.UUID;
 
 public class Person {
@@ -13,6 +15,8 @@ public class Person {
     private int age;
     private String stage;
     private UUID id;
+    private Base64 password;
+    private String email;
 
     private Person() {}
 
@@ -78,5 +82,21 @@ public class Person {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Base64 getPassword() {
+        return password;
+    }
+
+    public void setPassword(Base64 password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

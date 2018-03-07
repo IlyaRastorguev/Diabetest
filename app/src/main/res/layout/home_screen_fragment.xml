@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="?attr/main_circle_background">
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginBottom="4dp"
+            android:textSize="24sp"
+            android:background="?attr/main_text_field_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginBottom="4dp"
+            android:textSize="24sp"
+            android:background="?attr/main_text_field_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginBottom="4dp"
+            android:textSize="24sp"
+            android:background="?attr/main_text_field_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
