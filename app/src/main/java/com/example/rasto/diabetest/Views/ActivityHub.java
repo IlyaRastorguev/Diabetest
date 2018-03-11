@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.rasto.diabetest.Adapters.GetFragmentClassInstance;
+import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Containers;
 import com.example.rasto.diabetest.Constants.Screens;
 import com.example.rasto.diabetest.Interfaces.Views.BasicView;
+import com.example.rasto.diabetest.Model.ApplicationState;
 import com.example.rasto.diabetest.R;
 
 public class ActivityHub extends AppCompatActivity implements BasicView {
@@ -23,12 +25,12 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
         if (containerStatus) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(containerId, getFragmentClassInstance.getFragmentInstance(screen))
+                    .replace(containerId, getFragmentClassInstance.getFragmentInstance(screen))
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(containerId, getFragmentClassInstance.getFragmentInstance(screen))
+                    .add(containerId, getFragmentClassInstance.getFragmentInstance(screen))
                     .commit();
         }
         return true;
@@ -47,12 +49,13 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.nextFragment(Screens.LOGIN, Containers.MAIN);
+        this.setFragment(Screens.LOGIN, Containers.MAIN);
+        this.setFragment(Screens.TOP_BAR, Containers.TOP);
     }
 
     @Override
-    public void nextFragment(Screens screen, Containers toContainer) {
-
+    public void setFragment(Screens screen, Containers toContainer) {
+        final ApplicationState applicationState = ApplicationState.getInstance();
         switch (toContainer) {
             case TOP:
                 this.topContainerNotEmpty =
@@ -61,6 +64,7 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
             case MAIN:
                 this.mainContainerNotEmpty =
                         this.addFragment(screen, toContainer.getContainer(), mainContainerNotEmpty);
+                applicationState.setCurrentScreen(screen);
                 break;
             case BOTTOM:
                 this.bottomContainerNotEmpty =
@@ -75,5 +79,15 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
                         this.addFragment(screen, toContainer.getContainer(), rightContainerNotEmpty);
                 break;
         }
+    }
+
+    @Override
+    public void hideElement(Components elementType, int id) {
+
+    }
+
+    @Override
+    public void showElement(Components elementType, int id) {
+
     }
 }

@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <layer-list>
-            <item>
-                <shape android:shape="rectangle">
-                    <padding android:top="8dp" android:right="8dp" android:left="8dp" />
-                    <gradient android:angle="90.0" android:endColor="#da3581" android:startColor="#882c93" />
-                </shape>
-            </item>
-            <item>
-                <shape android:shape="rectangle">
-                    <solid android:color="#c8ffffff" />
-                    <corners android:topLeftRadius="8dp" android:topRightRadius="8dp" />
-                </shape>
-            </item>
-        </layer-list>
+        <shape android:shape="rectangle">
+            <gradient android:angle="90.0" android:endColor="#000b31" android:startColor="#1f0a21" />
+        </shape>
     </item>
 </selector>

@@ -8,9 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rasto.diabetest.Adapters.TextWatcherAdapter;
+import com.example.rasto.diabetest.Constants.Components;
+import com.example.rasto.diabetest.Constants.Containers;
 import com.example.rasto.diabetest.Constants.Patterns;
+import com.example.rasto.diabetest.Constants.Screens;
 import com.example.rasto.diabetest.Interactors.LoginInteractor;
 import com.example.rasto.diabetest.Interfaces.Views.ILoginView;
 import com.example.rasto.diabetest.Presenter.LoginPresenter;
@@ -35,8 +40,10 @@ public class LoginFragment extends Fragment implements ILoginView {
     private void componentsInit(View view) {
         email = (EditText) view.findViewById(R.id.email);
         email.addTextChangedListener(new TextWatcherAdapter(this.loginPresenter, email, Patterns.EMAIL));
+        loginPresenter.setOnFocusChangeListener(email);
         pass = (EditText) view.findViewById(R.id.pass);
         pass.addTextChangedListener(new TextWatcherAdapter(this.loginPresenter, pass, Patterns.PASSWORD));
+        loginPresenter.setOnFocusChangeListener(pass);
         login = (Button) view.findViewById(R.id.login);
         registration = (Button) view.findViewById(R.id.registration);
     }
@@ -70,7 +77,7 @@ public class LoginFragment extends Fragment implements ILoginView {
 
     @Override
     public void showSnackBar(String message) {
-        final SnackBarComponent snackBarComponent = new SnackBarComponent(this.view, message);
+        final SnackBarComponent snackBarComponent = new SnackBarComponent(view.findViewById(R.id.login_block), message);
         snackBarComponent.showSnackBar();
     }
 
@@ -79,4 +86,41 @@ public class LoginFragment extends Fragment implements ILoginView {
 
     }
 
+    @Override
+    public String getResources(int id) {
+        return getContext().getResources().getString(id);
+    }
+
+    @Override
+    public void setFragment(Screens screen, Containers toContainer) {
+
+    }
+
+    @Override
+    public void hideElement(Components elementType, int id) {
+        switch (elementType) {
+            case LINEAR_LAYOUT:
+                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
+                linearLayout.setVisibility(View.GONE);
+                break;
+            case TEXT_VIEW:
+                final TextView textView = (TextView) view.findViewById(id);
+                textView.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    @Override
+    public void showElement(Components elementType, int id) {
+        switch (elementType) {
+            case LINEAR_LAYOUT:
+                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
+                linearLayout.setVisibility(View.VISIBLE);
+                break;
+            case TEXT_VIEW:
+                final TextView textView = (TextView) view.findViewById(id);
+                textView.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 }

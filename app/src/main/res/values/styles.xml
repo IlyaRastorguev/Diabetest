@@ -6,10 +6,13 @@
     <attr name="main_block_background" format="reference" />
     <attr name="main_text_field_background" format="reference" />
     <attr name="main_app_bar_background" format="reference" />
+    <attr name="transparent_button" format="reference" />
+    <attr name="main_font" format="reference" />
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="main_font">@font/poiret_one</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="main_background">@drawable/app_background</item>
@@ -19,6 +22,7 @@
         <item name="main_block_background">@drawable/block_background</item>
         <item name="main_text_field_background">@drawable/text_field_background</item>
         <item name="main_app_bar_background">@drawable/app_bar_background</item>
+        <item name="transparent_button">@drawable/transparent_button_background</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

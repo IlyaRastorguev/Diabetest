@@ -1,8 +1,10 @@
 package com.example.rasto.diabetest.Presenter;
 
+import android.view.View;
 import android.widget.EditText;
 
 import com.example.rasto.diabetest.Adapters.FieldValidatorAdapter;
+import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Patterns;
 import com.example.rasto.diabetest.Constants.StatusCode;
 import com.example.rasto.diabetest.Interfaces.IInteractor;
@@ -70,8 +72,24 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
             this.setStatus(false);
         }
         if (!this.noErrors) {
-            this.loginView.showSnackBar(String.format("1%S", R.string.fields_error));
+            this.loginView.showSnackBar(String.format("%S", this.loginView.getResources(R.string.fields_error)));
         }
+    }
+
+    @Override
+    public void setOnFocusChangeListener(EditText field) {
+        field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    loginView.hideElement(Components.LINEAR_LAYOUT, R.id.main_logo);
+                    loginView.showElement(Components.TEXT_VIEW, R.id.second_logo);
+                } else {
+                    loginView.hideElement(Components.TEXT_VIEW, R.id.second_logo);
+                    loginView.showElement(Components.LINEAR_LAYOUT, R.id.main_logo);
+                }
+            }
+        });
     }
 
 
@@ -84,7 +102,11 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         String message = null;
         switch (errorCode) {
             case NO_CONNECTION:
-                message = String.format("1%S. 2%S.", R.string.login_error, R.string.no_internet_connection);
+                message = String.format(
+                        "%S. %S.",
+                        this.loginView.getResources(R.string.login_error),
+                        this.loginView.getResources(R.string.no_internet_connection)
+                );
                 break;
             case USER_NOT_EXIST:
                 break;
@@ -127,10 +149,10 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         } else {
             switch (pattern) {
                 case EMAIL:
-                    message = String.format("1%s", R.string.email_error);
+                    message = String.format("%S", this.loginView.getResources(R.string.email_error));
                     break;
                 case PASSWORD:
-                    message = String.format("1%s", R.string.pass_error);
+                    message = String.format("%S", this.loginView.getResources(R.string.pass_error));
                     break;
             }
             loginView.setFieldError(field);

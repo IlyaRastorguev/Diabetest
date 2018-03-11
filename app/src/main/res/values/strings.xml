@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Diabetest</string>
+    <string name="login_step">Вход</string>
     <string name="registration_label">Регистрация</string>
     <string name="login">Войти</string>
     <string name="email_hint">Введите email</string>
@@ -7,8 +8,8 @@
     <string name="login_error">Произошла ошибка при попытке логина</string>
     <string name="no_internet_connection">Отсутствует подключение к интернету</string>
     <string name="server_not_response">Сервер не отвечает</string>
-    <string name="email_error">Введен не корректный email</string>
-    <string name="pass_error">Пароль должен содержать хотя бы одну цифру и букву в верхнем или нижнем регистре</string>
+    <string name="email_error">Адрес электронной почты должен иметь вид: post@post.ru</string>
+    <string name="pass_error">Пароль должен содержать хотя бы одну цифру и букву в другом регистре</string>
     <string name="action_settings">Настройки</string>
     <string name="fields_error">При проверке введенных данных обнаружены ошибки</string>
     <string name="bread_units">Х. Е.</string>

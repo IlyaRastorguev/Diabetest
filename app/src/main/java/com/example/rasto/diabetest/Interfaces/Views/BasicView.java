@@ -1,5 +1,6 @@
 package com.example.rasto.diabetest.Interfaces.Views;
 
+import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Containers;
 import com.example.rasto.diabetest.Constants.Screens;
 
@@ -8,5 +9,11 @@ import com.example.rasto.diabetest.Constants.Screens;
  */
 
 public interface BasicView {
-    void nextFragment(Screens screen, Containers toContainer);
+
+    void setFragment(Screens screen, Containers toContainer);
+
+    void hideElement(Components elementType, int id);
+
+    void showElement(Components elementType, int id);
+
 }

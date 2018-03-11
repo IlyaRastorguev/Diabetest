@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.rasto.diabetest.Constants.Screens;
 import com.example.rasto.diabetest.Fragments.LoginFragment;
+import com.example.rasto.diabetest.Fragments.TopBarFragment;
 
 /**
  * Created by rasto on 3/4/2018.
@@ -16,6 +17,8 @@ public class GetFragmentClassInstance {
         switch (screen) {
             case LOGIN:
                 return new LoginFragment();
+            case TOP_BAR:
+                return new TopBarFragment();
         }
         return null;
     }

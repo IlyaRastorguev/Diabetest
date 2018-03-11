@@ -8,6 +8,7 @@ import com.example.rasto.diabetest.R;
 
 public enum Screens {
 
+    TOP_BAR(R.layout.top_bar_fragment),
     LOGIN(R.layout.login_fragment);
 
     private int fragmentId;

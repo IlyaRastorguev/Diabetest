@@ -14,6 +14,8 @@ public interface PresenterInterface {
 
         void validateCredentials(EditText email, EditText pass);
 
+        void setOnFocusChangeListener(EditText field);
+
     }
 
     interface IRegistrationScreen {
@@ -23,6 +25,15 @@ public interface PresenterInterface {
         void ifRegistrationIsSuccessfull();
 
         void ifRegistrationFaild();
+    }
+
+    interface ITopBar {
+
+        void stepBack();
+
+        void stepForward();
+
+        void setCurrentStep();
     }
 
     void onStart();
