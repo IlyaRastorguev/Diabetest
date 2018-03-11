@@ -54,6 +54,11 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public void setFragment(Screens screen, Containers toContainer) {
         final ApplicationState applicationState = ApplicationState.getInstance();
         switch (toContainer) {
