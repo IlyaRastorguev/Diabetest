@@ -3,8 +3,9 @@ package com.example.rasto.diabetest.Adapters;
 
 import android.support.v4.app.Fragment;
 
-import com.example.rasto.diabetest.Constants.Screens;
+import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Fragments.LoginFragment;
+import com.example.rasto.diabetest.Fragments.SingUpFragment;
 import com.example.rasto.diabetest.Fragments.TopBarFragment;
 
 /**
@@ -13,10 +14,12 @@ import com.example.rasto.diabetest.Fragments.TopBarFragment;
 
 public class GetFragmentClassInstance {
 
-    public Fragment getFragmentInstance(Screens screen) {
+    public Fragment getFragmentInstance(Fragments screen) {
         switch (screen) {
             case LOGIN:
                 return new LoginFragment();
+            case SING_UP:
+                return new SingUpFragment();
             case TOP_BAR:
                 return new TopBarFragment();
         }

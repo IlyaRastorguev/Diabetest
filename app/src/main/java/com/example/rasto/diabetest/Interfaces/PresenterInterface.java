@@ -1,5 +1,6 @@
 package com.example.rasto.diabetest.Interfaces;
 
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -8,23 +9,25 @@ import android.widget.EditText;
 
 public interface PresenterInterface {
 
-    interface IloginScreen {
+    interface ILoginFragment {
 
         void tryToLogin();
 
         void validateCredentials(EditText email, EditText pass);
 
-        void setOnFocusChangeListener(EditText field);
+        void setOnActivateFragmentListener(Button tab);
 
     }
 
-    interface IRegistrationScreen {
+    interface ISingUpFragment {
 
         void tryToRegistration();
 
         void ifRegistrationIsSuccessfull();
 
-        void ifRegistrationFaild();
+        void ifRegistrationFailed();
+
+        void setOnActivateFragmentListener(Button tab);
     }
 
     interface ITopBar {

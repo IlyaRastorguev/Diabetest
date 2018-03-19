@@ -2,7 +2,7 @@ package com.example.rasto.diabetest.Interfaces.Views;
 
 import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Containers;
-import com.example.rasto.diabetest.Constants.Screens;
+import com.example.rasto.diabetest.Constants.Fragments;
 
 /**
  * Created by rasto on 3/4/2018.
@@ -10,7 +10,7 @@ import com.example.rasto.diabetest.Constants.Screens;
 
 public interface BasicView {
 
-    void setFragment(Screens screen, Containers toContainer);
+    void setFragment(Fragments screen, Containers toContainer);
 
     void hideElement(Components elementType, int id);
 

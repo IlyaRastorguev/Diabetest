@@ -5,24 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.rasto.diabetest.Adapters.GetFragmentClassInstance;
 import com.example.rasto.diabetest.Constants.Components;
+import com.example.rasto.diabetest.Constants.ContainerType;
 import com.example.rasto.diabetest.Constants.Containers;
-import com.example.rasto.diabetest.Constants.Screens;
+import com.example.rasto.diabetest.Constants.Fragments;
+import com.example.rasto.diabetest.Constants.Steps;
 import com.example.rasto.diabetest.Interfaces.Views.BasicView;
 import com.example.rasto.diabetest.Model.ApplicationState;
 import com.example.rasto.diabetest.R;
 
 public class ActivityHub extends AppCompatActivity implements BasicView {
 
-    private boolean topContainerNotEmpty = false;
-    private boolean mainContainerNotEmpty = false;
-    private boolean bottomContainerNotEmpty = false;
-    private boolean leftContainerNotEmpty = false;
-    private boolean rightContainerNotEmpty = false;
-
     private GetFragmentClassInstance getFragmentClassInstance = new GetFragmentClassInstance();
 
-    private boolean addFragment(Screens screen, int containerId, boolean containerStatus) {
-        if (containerStatus) {
+    private static final ApplicationState APP_STATE = ApplicationState.getInstance();
+
+    private void addFragment(Fragments screen, int containerId, boolean containerStatus, ContainerType containerType) {
+        if (containerStatus && containerType == ContainerType.SINGLE) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(containerId, getFragmentClassInstance.getFragmentInstance(screen))
@@ -33,10 +31,9 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
                     .add(containerId, getFragmentClassInstance.getFragmentInstance(screen))
                     .commit();
         }
-        return true;
     }
 
-    private boolean removeFragment(Screens screen, int containerId) {
+    private boolean removeFragment(Fragments screen, int containerId) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .remove(getFragmentClassInstance.getFragmentInstance(screen))
@@ -49,39 +46,55 @@ public class ActivityHub extends AppCompatActivity implements BasicView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.setFragment(Screens.LOGIN, Containers.MAIN);
-        this.setFragment(Screens.TOP_BAR, Containers.TOP);
+        APP_STATE.setCurrentAppStep(Steps.START);
+        APP_STATE.setMainContainerState(ContainerType.MULTIPLY);
+        this.setFragment(Fragments.LOGIN, Containers.MAIN);
+        this.setFragment(Fragments.SING_UP, Containers.MAIN);
+        this.setFragment(Fragments.TOP_BAR, Containers.TOP);
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void setFragment(Screens screen, Containers toContainer) {
-        final ApplicationState applicationState = ApplicationState.getInstance();
+    public void setFragment(Fragments fragment, Containers toContainer) {
         switch (toContainer) {
             case TOP:
-                this.topContainerNotEmpty =
-                        this.addFragment(screen, toContainer.getContainer(), topContainerNotEmpty);
+                this.addFragment(
+                        fragment,
+                        toContainer.getContainer(),
+                        APP_STATE.isTopContainerNotEmpty(),
+                        APP_STATE.getTopContainerState()
+                );
                 break;
             case MAIN:
-                this.mainContainerNotEmpty =
-                        this.addFragment(screen, toContainer.getContainer(), mainContainerNotEmpty);
-                applicationState.setCurrentScreen(screen);
+                this.addFragment(
+                        fragment,
+                        toContainer.getContainer(),
+                        APP_STATE.isMainContainerNotEmpty(),
+                        APP_STATE.getMainContainerState()
+                );
                 break;
             case BOTTOM:
-                this.bottomContainerNotEmpty =
-                        this.addFragment(screen, toContainer.getContainer(), bottomContainerNotEmpty);
+                this.addFragment(
+                        fragment,
+                        toContainer.getContainer(),
+                        APP_STATE.isBottomContainerNotEmpty(),
+                        APP_STATE.getBottomContainerState()
+                );
                 break;
             case LEFT:
-                this.leftContainerNotEmpty =
-                        this.addFragment(screen, toContainer.getContainer(), leftContainerNotEmpty);
+                this.addFragment(
+                        fragment,
+                        toContainer.getContainer(),
+                        APP_STATE.isLeftContainerNotEmpty(),
+                        APP_STATE.getLeftContainerState()
+                );
                 break;
             case RIGHT:
-                this.rightContainerNotEmpty =
-                        this.addFragment(screen, toContainer.getContainer(), rightContainerNotEmpty);
+                this.addFragment(
+                        fragment,
+                        toContainer.getContainer(),
+                        APP_STATE.isRightContainerNotEmpty(),
+                        APP_STATE.getRightContainerState()
+                );
                 break;
         }
     }

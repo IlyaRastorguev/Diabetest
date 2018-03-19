@@ -15,11 +15,11 @@
         <item name="main_font">@font/comfortaa</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="main_background">@drawable/app_background</item>
+        <item name="main_background">@drawable/app_background_dark</item>
         <item name="main_button_background">@drawable/button_background</item>
         <item name="main_input_background">@drawable/input_background</item>
         <item name="main_circle_background">@drawable/circle_background</item>
-        <item name="main_block_background">@drawable/block_background</item>
+        <item name="main_block_background">@drawable/block_background_dark</item>
         <item name="main_text_field_background">@drawable/text_field_background</item>
         <item name="main_app_bar_background">@drawable/app_bar_background</item>
         <item name="transparent_button">@drawable/transparent_button_background</item>

@@ -6,10 +6,12 @@ import com.example.rasto.diabetest.R;
  * Created by rasto on 3/4/2018.
  */
 
-public enum Screens {
+public enum Fragments {
 
     TOP_BAR(R.layout.top_bar_fragment),
-    LOGIN(R.layout.login_fragment);
+    LOGIN(R.layout.login_fragment),
+    SING_UP(R.layout.sing_up_fragment),
+    NULL(0);
 
     private int fragmentId;
 
@@ -17,7 +19,7 @@ public enum Screens {
         return fragmentId;
     }
 
-    private Screens(int value) {
+    private Fragments(int value) {
         this.fragmentId = value;
     }
 }

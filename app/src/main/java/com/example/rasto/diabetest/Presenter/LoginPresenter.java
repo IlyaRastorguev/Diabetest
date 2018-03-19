@@ -1,16 +1,19 @@
 package com.example.rasto.diabetest.Presenter;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.rasto.diabetest.Adapters.FieldValidatorAdapter;
 import com.example.rasto.diabetest.Constants.Components;
+import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Patterns;
 import com.example.rasto.diabetest.Constants.StatusCode;
 import com.example.rasto.diabetest.Interfaces.IInteractor;
 import com.example.rasto.diabetest.Interfaces.PresenterInterface;
 import com.example.rasto.diabetest.Interfaces.TextWatcherCallBack;
 import com.example.rasto.diabetest.Interfaces.Views.ILoginView;
+import com.example.rasto.diabetest.Model.ApplicationState;
 import com.example.rasto.diabetest.Model.Person;
 import com.example.rasto.diabetest.R;
 
@@ -18,11 +21,12 @@ import com.example.rasto.diabetest.R;
  * Created by rasto on 3/4/2018.
  */
 
-public class LoginPresenter extends FieldValidatorAdapter implements TextWatcherCallBack, PresenterInterface, PresenterInterface.IloginScreen {
+public class LoginPresenter extends FieldValidatorAdapter implements TextWatcherCallBack, PresenterInterface, PresenterInterface.ILoginFragment {
 
     private ILoginView loginView;
     private IInteractor.ILogin login;
     private Person person;
+    private ApplicationState applicationState;
 
     private boolean noErrors = true;
 
@@ -30,6 +34,7 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         this.loginView = loginView;
         this.login = login;
         this.person = Person.getInstance();
+        this.applicationState = ApplicationState.getInstance();
     }
 
     private void setStatus(boolean status) {
@@ -77,16 +82,19 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
     }
 
     @Override
-    public void setOnFocusChangeListener(EditText field) {
-        field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+    public void setOnActivateFragmentListener(Button tab) {
+        tab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    loginView.hideElement(Components.LINEAR_LAYOUT, R.id.main_logo);
-                    loginView.showElement(Components.TEXT_VIEW, R.id.second_logo);
-                } else {
-                    loginView.hideElement(Components.TEXT_VIEW, R.id.second_logo);
-                    loginView.showElement(Components.LINEAR_LAYOUT, R.id.main_logo);
+            public void onClick(View view) {
+                switch (applicationState.getCurrentActiveFragment()) {
+                    case LOGIN:
+                        loginView.hideElement(Components.LINEAR_LAYOUT, R.id.active_part);
+                        applicationState.setCurrentActiveFragment(Fragments.NULL);
+                        break;
+                    default:
+                        loginView.showElement(Components.LINEAR_LAYOUT, R.id.active_part);
+                        applicationState.setCurrentActiveFragment(Fragments.LOGIN);
+                        break;
                 }
             }
         });
@@ -142,23 +150,19 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
 
     @Override
     public void textWatcherCallback(EditText field, Patterns pattern) {
-        String message = null;
-
         if (this.validateField(field.getText().toString(), pattern.getPattern())) {
             loginView.hideFieldError(field);
         } else {
-            switch (pattern) {
-                case EMAIL:
-                    message = String.format("%S", this.loginView.getResources(R.string.email_error));
-                    break;
-                case PASSWORD:
-                    message = String.format("%S", this.loginView.getResources(R.string.pass_error));
-                    break;
-            }
+            //TODO сделать показ сообщений с подсказками при нажатии на кнопку
+//            switch (pattern) {
+//                case EMAIL:
+//                    message = String.format("%S", this.loginView.getResources(R.string.email_error));
+//                    break;
+//                case PASSWORD:
+//                    message = String.format("%S", this.loginView.getResources(R.string.pass_error));
+//                    break;
+//            }
             loginView.setFieldError(field);
-        }
-        if (message != null) {
-            loginView.showSnackBar(message);
         }
     }
 }

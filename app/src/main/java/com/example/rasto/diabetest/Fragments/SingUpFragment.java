@@ -9,85 +9,83 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.rasto.diabetest.Adapters.TextWatcherAdapter;
 import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Containers;
-import com.example.rasto.diabetest.Constants.Patterns;
 import com.example.rasto.diabetest.Constants.Fragments;
-import com.example.rasto.diabetest.Interactors.LoginInteractor;
-import com.example.rasto.diabetest.Interfaces.Views.ILoginView;
-import com.example.rasto.diabetest.Presenter.LoginPresenter;
+import com.example.rasto.diabetest.Interfaces.Views.ISingUpView;
+import com.example.rasto.diabetest.Presenter.SingUpPresenter;
 import com.example.rasto.diabetest.R;
 
 /**
- * Created by rasto on 2/25/2018.
+ * Created by irastorguev on 18.03.2018.
  */
 
-public class LoginFragment extends Fragment implements ILoginView {
+public class SingUpFragment extends Fragment implements ISingUpView {
 
     private EditText email;
     private EditText pass;
+    private EditText firstName;
+    private EditText middleName;
+    private EditText lastName;
+    private EditText age;
+    private EditText weight;
+    private Spinner sex;
+    private Spinner diabetes;
+    private Button activateSingUpTab;
 
-    private Button login;
-    private Button activateLoginTab;
-
-
-    private LoginPresenter loginPresenter;
+    private SingUpPresenter singUpPresenter;
 
     private View view;
 
     private void componentsInit() {
-        email = (EditText) view.findViewById(R.id.email);
-        email.addTextChangedListener(new TextWatcherAdapter(this.loginPresenter, email, Patterns.EMAIL));
-        pass = (EditText) view.findViewById(R.id.pass);
-        pass.addTextChangedListener(new TextWatcherAdapter(this.loginPresenter, pass, Patterns.PASSWORD));
-        login = (Button) view.findViewById(R.id.login);
-        activateLoginTab = (Button) view.findViewById(R.id.login_tab);
-        loginPresenter.setOnActivateFragmentListener(activateLoginTab);
+        this.email = (EditText) view.findViewById(R.id.email);
+        this.pass = (EditText) view.findViewById(R.id.pass);
+        this.firstName = (EditText) view.findViewById(R.id.first_name);
+        this.lastName = (EditText) view.findViewById(R.id.last_name);
+        this.middleName = (EditText) view.findViewById(R.id.middle_name);
+        this.age = (EditText) view.findViewById(R.id.age);
+        this.weight = (EditText) view.findViewById(R.id.weight);
+        this.sex = (Spinner) view.findViewById(R.id.sex);
+        this.diabetes = (Spinner) view.findViewById(R.id.diabetes);
+        this.activateSingUpTab = (Button) view.findViewById(R.id.sing_up_tab);
+        this.singUpPresenter.setOnActivateFragmentListener(activateSingUpTab);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.loginPresenter = new LoginPresenter(this, new LoginInteractor());
-        this.view = inflater.inflate(R.layout.login_fragment, container, false);
+        this.singUpPresenter = new SingUpPresenter(this);
+        this.view = inflater.inflate(R.layout.sing_up_fragment, container, false);
         componentsInit();
-        this.login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginPresenter.validateCredentials(email, pass);
-                loginPresenter.tryToLogin();
-            }
-        });
         return this.view;
     }
 
     @Override
     public void setFieldError(EditText fieldError) {
-        fieldError.setBackgroundResource(R.drawable.error_input);
+
     }
 
     @Override
     public void hideFieldError(EditText fieldError) {
-        fieldError.setBackgroundResource(R.drawable.input_background);
+
     }
 
     @Override
     public void showSnackBar(String message) {
-        final SnackBarComponent snackBarComponent = new SnackBarComponent(view.findViewById(R.id.login_block), message);
-        snackBarComponent.showSnackBar();
-    }
-
-    @Override
-    public void goNext() {
 
     }
 
     @Override
     public String getResources(int id) {
-        return getContext().getResources().getString(id);
+        return null;
+    }
+
+    @Override
+    public void goNext() {
+
     }
 
     @Override
