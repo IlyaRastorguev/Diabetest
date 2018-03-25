@@ -9,21 +9,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.rasto.diabetest.Constants.Components;
-import com.example.rasto.diabetest.Constants.Containers;
-import com.example.rasto.diabetest.Constants.Fragments;
+import com.example.rasto.diabetest.Interfaces.Views.FragmentCallBack;
 import com.example.rasto.diabetest.Interfaces.Views.ISingUpView;
 import com.example.rasto.diabetest.Presenter.SingUpPresenter;
 import com.example.rasto.diabetest.R;
+
+import java.nio.file.WatchEvent;
 
 /**
  * Created by irastorguev on 18.03.2018.
  */
 
-public class SingUpFragment extends Fragment implements ISingUpView {
+public class SingUpFragment extends Fragment implements ISingUpView, FragmentCallBack {
 
     private EditText email;
     private EditText pass;
@@ -32,8 +35,11 @@ public class SingUpFragment extends Fragment implements ISingUpView {
     private EditText lastName;
     private EditText age;
     private EditText weight;
+
     private Spinner sex;
     private Spinner diabetes;
+
+
     private Button activateSingUpTab;
 
     private SingUpPresenter singUpPresenter;
@@ -89,16 +95,11 @@ public class SingUpFragment extends Fragment implements ISingUpView {
     }
 
     @Override
-    public void setFragment(Fragments screen, Containers toContainer) {
-
-    }
-
-    @Override
     public void hideElement(Components elementType, int id) {
         switch (elementType) {
-            case LINEAR_LAYOUT:
-                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
-                linearLayout.setVisibility(View.GONE);
+            case RELATIVE_LAYOUT:
+                final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(id);
+                relativeLayout.setVisibility(View.GONE);
                 break;
             case TEXT_VIEW:
                 final TextView textView = (TextView) view.findViewById(id);
@@ -110,14 +111,27 @@ public class SingUpFragment extends Fragment implements ISingUpView {
     @Override
     public void showElement(Components elementType, int id) {
         switch (elementType) {
-            case LINEAR_LAYOUT:
-                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
-                linearLayout.setVisibility(View.VISIBLE);
+            case RELATIVE_LAYOUT:
+                final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(id);
+                relativeLayout.setVisibility(View.VISIBLE);
                 break;
             case TEXT_VIEW:
                 final TextView textView = (TextView) view.findViewById(id);
                 textView.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    @Override
+    public void callBackHandler() {
+        if (singUpPresenter.isFragmentActive()) {
+            view.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 100f));
+            activateSingUpTab.setTextSize(40);
+            showElement(Components.RELATIVE_LAYOUT, R.id.active_part);
+        } else {
+            view.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0f));
+            activateSingUpTab.setTextSize(32);
+            hideElement(Components.RELATIVE_LAYOUT, R.id.active_part);
         }
     }
 }

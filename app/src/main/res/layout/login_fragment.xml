@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_block"
+    android:layout_weight="0"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,31 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/login_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:padding="8dp"
-            android:text="@string/login"
-            android:gravity="start"
-            android:textAllCaps="false"
-            android:textAlignment="viewStart"
-            android:fontFamily="?attr/main_font"
             android:background="?attr/transparent_button"
-            android:textColor="@color/colorPrimaryWhite"/>
+            android:fontFamily="?attr/main_font"
+            android:gravity="start"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="8dp"
+            android:text="@string/login"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="32sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/active_part"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="?attr/main_block_background"
             android:orientation="vertical"
             android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="8">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,12 +53,13 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_background"
                         android:drawableLeft="@drawable/ic_mail_address"
-                        android:drawablePadding="8dp"
+                        android:drawablePadding="4dp"
                         android:drawableStart="@drawable/ic_mail_address"
                         android:focusableInTouchMode="true"
                         android:fontFamily="?attr/main_font"
                         android:hint="@string/email_hint"
                         android:inputType="textEmailAddress"
+                        android:singleLine="true"
                         android:textColor="@color/colorPrimaryWhite"
                         android:textColorHint="@color/colorHintWhite" />
 
@@ -67,24 +75,30 @@
                         android:fontFamily="?attr/main_font"
                         android:hint="@string/pass_hint"
                         android:inputType="textPassword"
+                        android:singleLine="true"
                         android:textColor="@color/colorPrimaryWhite"
                         android:textColorHint="@color/colorHintWhite" />
+
                 </LinearLayout>
+
             </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_alignParentBottom="true"
+                android:background="?attr/main_semi_transparent_block"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <Button
                     android:id="@+id/login"
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:background="?attr/main_button_background"
                     android:drawableEnd="@drawable/ic_forward_button"
                     android:drawablePadding="-32dp"
@@ -94,7 +108,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryWhite" />
             </LinearLayout>
-        </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

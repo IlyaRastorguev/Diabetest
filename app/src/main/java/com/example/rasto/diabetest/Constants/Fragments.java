@@ -8,18 +8,24 @@ import com.example.rasto.diabetest.R;
 
 public enum Fragments {
 
-    TOP_BAR(R.layout.top_bar_fragment),
-    LOGIN(R.layout.login_fragment),
-    SING_UP(R.layout.sing_up_fragment),
-    NULL(0);
+    NULL(0, null),
+    TOP_BAR(R.layout.top_bar_fragment, Containers.TOP),
+    LOGIN(R.layout.login_fragment, Containers.MAIN),
+    SING_UP(R.layout.sing_up_fragment, Containers.MAIN);
 
     private int fragmentId;
+    private Containers primaryContainer;
 
     public int getFragmentId() {
         return fragmentId;
     }
 
-    private Fragments(int value) {
+    public Containers getPrimaryContainer() {
+        return primaryContainer;
+    }
+
+    Fragments(int value, Containers primaryContainer) {
         this.fragmentId = value;
+        this.primaryContainer = primaryContainer;
     }
 }

@@ -32,7 +32,7 @@ public class TopBarPresenter implements PresenterInterface.ITopBar {
     @Override
     public void setCurrentStep() {
         switch (applicationState.getCurrentAppStep()) {
-            case START:
+            case LOGIN:
                 topBarView.setCurrentStep(R.string.login_step);
                 break;
         }

@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.rasto.diabetest.Adapters.TextWatcherAdapter;
 import com.example.rasto.diabetest.Constants.Components;
-import com.example.rasto.diabetest.Constants.Containers;
 import com.example.rasto.diabetest.Constants.Patterns;
-import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Interactors.LoginInteractor;
+import com.example.rasto.diabetest.Interfaces.Views.FragmentCallBack;
 import com.example.rasto.diabetest.Interfaces.Views.ILoginView;
 import com.example.rasto.diabetest.Presenter.LoginPresenter;
 import com.example.rasto.diabetest.R;
@@ -25,7 +26,7 @@ import com.example.rasto.diabetest.R;
  * Created by rasto on 2/25/2018.
  */
 
-public class LoginFragment extends Fragment implements ILoginView {
+public class LoginFragment extends Fragment implements ILoginView, FragmentCallBack {
 
     private EditText email;
     private EditText pass;
@@ -91,16 +92,11 @@ public class LoginFragment extends Fragment implements ILoginView {
     }
 
     @Override
-    public void setFragment(Fragments screen, Containers toContainer) {
-
-    }
-
-    @Override
     public void hideElement(Components elementType, int id) {
         switch (elementType) {
-            case LINEAR_LAYOUT:
-                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
-                linearLayout.setVisibility(View.GONE);
+            case RELATIVE_LAYOUT:
+                final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(id);
+                relativeLayout.setVisibility(View.GONE);
                 break;
             case TEXT_VIEW:
                 final TextView textView = (TextView) view.findViewById(id);
@@ -112,14 +108,27 @@ public class LoginFragment extends Fragment implements ILoginView {
     @Override
     public void showElement(Components elementType, int id) {
         switch (elementType) {
-            case LINEAR_LAYOUT:
-                final LinearLayout linearLayout = (LinearLayout) view.findViewById(id);
-                linearLayout.setVisibility(View.VISIBLE);
+            case RELATIVE_LAYOUT:
+                final RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(id);
+                relativeLayout.setVisibility(View.VISIBLE);
                 break;
             case TEXT_VIEW:
                 final TextView textView = (TextView) view.findViewById(id);
                 textView.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    @Override
+    public void callBackHandler() {
+        if (loginPresenter.isFragmentActive()) {
+            view.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 100f));
+            activateLoginTab.setTextSize(40);
+            showElement(Components.RELATIVE_LAYOUT, R.id.active_part);
+        } else {
+            view.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0f));
+            activateLoginTab.setTextSize(32);
+            hideElement(Components.RELATIVE_LAYOUT, R.id.active_part);
         }
     }
 }

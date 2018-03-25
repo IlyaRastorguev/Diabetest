@@ -26,7 +26,7 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
     private ILoginView loginView;
     private IInteractor.ILogin login;
     private Person person;
-    private ApplicationState applicationState;
+    private final ApplicationState APP_STATE;
 
     private boolean noErrors = true;
 
@@ -34,7 +34,7 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         this.loginView = loginView;
         this.login = login;
         this.person = Person.getInstance();
-        this.applicationState = ApplicationState.getInstance();
+        this.APP_STATE = ApplicationState.getInstance();
     }
 
     private void setStatus(boolean status) {
@@ -86,16 +86,15 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (applicationState.getCurrentActiveFragment()) {
+                switch (APP_STATE.getCurrentActiveFragment()) {
                     case LOGIN:
-                        loginView.hideElement(Components.LINEAR_LAYOUT, R.id.active_part);
-                        applicationState.setCurrentActiveFragment(Fragments.NULL);
+                        APP_STATE.setCurrentActiveFragment(Fragments.NULL);
                         break;
                     default:
-                        loginView.showElement(Components.LINEAR_LAYOUT, R.id.active_part);
-                        applicationState.setCurrentActiveFragment(Fragments.LOGIN);
+                        APP_STATE.setCurrentActiveFragment(Fragments.LOGIN);
                         break;
                 }
+                APP_STATE.getController().startCallBacks();
             }
         });
     }
@@ -130,7 +129,6 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
 
     @Override
     public void onStart() {
-
     }
 
     @Override
@@ -164,5 +162,10 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
 //            }
             loginView.setFieldError(field);
         }
+    }
+
+    @Override
+    public boolean isFragmentActive() {
+        return APP_STATE.getCurrentActiveFragment() == Fragments.LOGIN;
     }
 }

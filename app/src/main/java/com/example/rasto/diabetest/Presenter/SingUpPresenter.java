@@ -21,7 +21,7 @@ import com.example.rasto.diabetest.R;
 
 public class SingUpPresenter extends FieldValidatorAdapter implements TextWatcherCallBack, PresenterInterface, PresenterInterface.ISingUpFragment {
 
-    private ApplicationState applicationState;
+    private final ApplicationState APP_STATE;
     private Person person;
 
     private ISingUpView singUpView;
@@ -29,7 +29,7 @@ public class SingUpPresenter extends FieldValidatorAdapter implements TextWatche
     public SingUpPresenter(ISingUpView singUpView) {
         this.singUpView = singUpView;
         this.person = Person.getInstance();
-        this.applicationState = ApplicationState.getInstance();
+        this.APP_STATE = ApplicationState.getInstance();
     }
 
     @Override
@@ -82,17 +82,21 @@ public class SingUpPresenter extends FieldValidatorAdapter implements TextWatche
         tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (applicationState.getCurrentActiveFragment()) {
+                switch (APP_STATE.getCurrentActiveFragment()) {
                     case SING_UP:
-                        singUpView.hideElement(Components.LINEAR_LAYOUT, R.id.active_part);
-                        applicationState.setCurrentActiveFragment(Fragments.NULL);
+                        APP_STATE.setCurrentActiveFragment(Fragments.NULL);
                         break;
                     default:
-                        singUpView.showElement(Components.LINEAR_LAYOUT, R.id.active_part);
-                        applicationState.setCurrentActiveFragment(Fragments.SING_UP);
+                        APP_STATE.setCurrentActiveFragment(Fragments.SING_UP);
                         break;
                 }
+                APP_STATE.getController().startCallBacks();
             }
         });
+    }
+
+    @Override
+    public boolean isFragmentActive() {
+       return APP_STATE.getCurrentActiveFragment() == Fragments.SING_UP;
     }
 }

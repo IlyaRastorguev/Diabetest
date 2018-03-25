@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <attr name="main_background" format="reference" />
     <attr name="main_button_background" format="reference" />
     <attr name="main_input_background" format="reference" />
@@ -8,13 +8,18 @@
     <attr name="main_app_bar_background" format="reference" />
     <attr name="transparent_button" format="reference" />
     <attr name="main_font" format="reference" />
+    <attr name="main_semi_transparent_block" format="reference"/>
+    <attr name="active_tab_background" format="reference"/>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor" tools:targetApi="21">@color/colorPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="main_font">@font/comfortaa</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="active_tab_background">@drawable/active_tab_background</item>
+        <item name="main_semi_transparent_block">@drawable/block_semi_transparent</item>
         <item name="main_background">@drawable/app_background_dark</item>
         <item name="main_button_background">@drawable/button_background</item>
         <item name="main_input_background">@drawable/input_background</item>

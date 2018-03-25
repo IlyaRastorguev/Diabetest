@@ -1,7 +1,15 @@
 package com.example.rasto.diabetest.Interfaces;
 
+import android.support.v4.app.Fragment;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.rasto.diabetest.Constants.Fragments;
+import com.example.rasto.diabetest.Constants.Steps;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rasto on 3/4/2018.
@@ -9,7 +17,12 @@ import android.widget.EditText;
 
 public interface PresenterInterface {
 
-    interface ILoginFragment {
+    interface IBasicFragment {
+
+        boolean isFragmentActive();
+    }
+
+    interface ILoginFragment extends IBasicFragment {
 
         void tryToLogin();
 
@@ -19,7 +32,7 @@ public interface PresenterInterface {
 
     }
 
-    interface ISingUpFragment {
+    interface ISingUpFragment extends IBasicFragment {
 
         void tryToRegistration();
 
@@ -37,6 +50,28 @@ public interface PresenterInterface {
         void stepForward();
 
         void setCurrentStep();
+    }
+
+    interface IActivityHub {
+
+        static final List<Fragment> FRAGMENTS = new ArrayList<>();
+
+        void fragmentsCallBack();
+
+        void fragmentInit(Fragments fragment);
+
+        void removeFragment(Fragments fragment);
+
+        void addFragment(Fragments fragments);
+
+        void replaceFragment(Fragments fragments);
+
+        void deleteFragmentList();
+
+        void stepController(Steps step);
+
+        void setSwipeListener(View view);
+
     }
 
     void onStart();

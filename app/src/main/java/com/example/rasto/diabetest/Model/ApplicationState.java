@@ -3,6 +3,7 @@ package com.example.rasto.diabetest.Model;
 import com.example.rasto.diabetest.Constants.ContainerType;
 import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Steps;
+import com.example.rasto.diabetest.Interfaces.Views.ActivityHubView;
 
 /**
  * Created by rasto on 3/10/2018.
@@ -27,6 +28,8 @@ public class ApplicationState {
     private ContainerType bottomContainerState = ContainerType.SINGLE;
     private ContainerType leftContainerState = ContainerType.SINGLE;
     private ContainerType rightContainerState = ContainerType.SINGLE;
+
+    private ActivityHubView controller;
 
     private ApplicationState() {
         this.currentActiveFragment = Fragments.NULL;
@@ -134,5 +137,13 @@ public class ApplicationState {
 
     public void setRightContainerState(ContainerType rightContainerState) {
         this.rightContainerState = rightContainerState;
+    }
+
+    public ActivityHubView getController() {
+        return controller;
+    }
+
+    public void setController(ActivityHubView controller) {
+        this.controller = controller;
     }
 }

@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ public enum Components {
     BUTTON(Button.class),
     VIEW(View.class),
     LINEAR_LAYOUT(LinearLayout.class),
+    RELATIVE_LAYOUT(RelativeLayout.class),
+    SCROLL_VIEW(ScrollView.class),
     SPINNER(Spinner.class);
 
     private Object component;

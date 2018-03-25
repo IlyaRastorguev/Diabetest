@@ -10,8 +10,6 @@ import com.example.rasto.diabetest.Constants.Fragments;
 
 public interface BasicView {
 
-    void setFragment(Fragments screen, Containers toContainer);
-
     void hideElement(Components elementType, int id);
 
     void showElement(Components elementType, int id);
