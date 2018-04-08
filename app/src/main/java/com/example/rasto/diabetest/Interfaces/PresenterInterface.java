@@ -17,12 +17,19 @@ import java.util.List;
 
 public interface PresenterInterface {
 
+    interface IResponsible {
+
+    }
+
     interface IBasicFragment {
 
         boolean isFragmentActive();
+
+        void setSwipeListener(View view);
     }
 
-    interface ILoginFragment extends IBasicFragment {
+
+    interface ILoginFragment extends IBasicFragment, TextWatcherCallBack {
 
         void tryToLogin();
 
@@ -32,7 +39,7 @@ public interface PresenterInterface {
 
     }
 
-    interface ISingUpFragment extends IBasicFragment {
+    interface ISingUpFragment extends IBasicFragment, TextWatcherCallBack {
 
         void tryToRegistration();
 
@@ -69,8 +76,6 @@ public interface PresenterInterface {
         void deleteFragmentList();
 
         void stepController(Steps step);
-
-        void setSwipeListener(View view);
 
     }
 

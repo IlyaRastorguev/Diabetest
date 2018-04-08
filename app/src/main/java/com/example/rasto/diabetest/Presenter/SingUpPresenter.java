@@ -1,11 +1,16 @@
 package com.example.rasto.diabetest.Presenter;
 
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.rasto.diabetest.Adapters.FieldValidatorAdapter;
+import com.example.rasto.diabetest.Adapters.SwipeController;
 import com.example.rasto.diabetest.Constants.Components;
+import com.example.rasto.diabetest.Constants.EventDirection;
+import com.example.rasto.diabetest.Constants.EventTypes;
 import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Patterns;
 import com.example.rasto.diabetest.Interfaces.PresenterInterface;
@@ -19,7 +24,7 @@ import com.example.rasto.diabetest.R;
  * Created by irastorguev on 18.03.2018.
  */
 
-public class SingUpPresenter extends FieldValidatorAdapter implements TextWatcherCallBack, PresenterInterface, PresenterInterface.ISingUpFragment {
+public class SingUpPresenter extends FieldValidatorAdapter implements PresenterInterface, PresenterInterface.ISingUpFragment {
 
     private final ApplicationState APP_STATE;
     private Person person;
@@ -44,7 +49,7 @@ public class SingUpPresenter extends FieldValidatorAdapter implements TextWatche
 
     @Override
     public void onStart() {
-
+        singUpView.getView().setY(APP_STATE.getDisplayMetrics().heightPixels - 96 * APP_STATE.getDisplayMetrics().density);
     }
 
     @Override
@@ -82,15 +87,26 @@ public class SingUpPresenter extends FieldValidatorAdapter implements TextWatche
         tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (APP_STATE.getCurrentActiveFragment()) {
-                    case SING_UP:
-                        APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                switch (APP_STATE.getEventType()) {
+                    case SWIPE:
+                        if (APP_STATE.getEventDirection() == EventDirection.TOP) {
+                            APP_STATE.setCurrentActiveFragment(Fragments.SING_UP);
+                        } else {
+                            APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                        }
+                        APP_STATE.setEventType(EventTypes.CLICK);
                         break;
-                    default:
-                        APP_STATE.setCurrentActiveFragment(Fragments.SING_UP);
+                    case CLICK:
+                    case NULL:
+                        APP_STATE.setEventType(EventTypes.CLICK);
+                        if (APP_STATE.getCurrentActiveFragment() == Fragments.SING_UP) {
+                            APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                        } else {
+                            APP_STATE.setCurrentActiveFragment(Fragments.SING_UP);
+                        }
+                        APP_STATE.getController().startCallBacks();
                         break;
                 }
-                APP_STATE.getController().startCallBacks();
             }
         });
     }
@@ -99,4 +115,36 @@ public class SingUpPresenter extends FieldValidatorAdapter implements TextWatche
     public boolean isFragmentActive() {
        return APP_STATE.getCurrentActiveFragment() == Fragments.SING_UP;
     }
+
+    @Override
+    public void setSwipeListener(final View view) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final GestureDetector swipeController = new GestureDetector(view.getContext(), new SwipeController(Fragments.SING_UP));
+                swipeController.onTouchEvent(event);
+                if (event.getHistorySize() > 0 && event.getAction() == MotionEvent.ACTION_MOVE) {
+                    APP_STATE.setEventType(EventTypes.SWIPE);
+                    if (event.getHistoricalAxisValue(1, 0 ) - event.getHistoricalAxisValue(1, event.getHistorySize() - 1 ) > 0) {
+                        APP_STATE.setEventDirection(EventDirection.TOP);
+                    } else APP_STATE.setEventDirection(EventDirection.DOWN);
+                    for (int index = 0; index < event.getHistorySize(); index++ ) {
+                        if (index > 0) {
+                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index - 1), event.getHistoricalAxisValue(1, index - 1));
+                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                        } else {
+                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                        }
+                        APP_STATE.getController().startCallBacks();
+                    }
+                    APP_STATE.setLastPoint(0f, 0f);
+                    APP_STATE.setCurrentPoint(0f, 0f);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 }

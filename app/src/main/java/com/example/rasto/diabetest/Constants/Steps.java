@@ -11,7 +11,7 @@ import java.util.List;
 
 public enum Steps {
     NULL(),
-    LOGIN(Fragments.LOGIN, Fragments.SING_UP),
+    LOGIN(Fragments.SING_UP_IMAGE, Fragments.LOGIN, Fragments.SING_UP),
     HOME();
 
     private List<Fragments> stepComponents;

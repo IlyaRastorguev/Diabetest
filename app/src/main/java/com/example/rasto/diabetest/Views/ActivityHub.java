@@ -2,6 +2,8 @@ package com.example.rasto.diabetest.Views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.rasto.diabetest.Adapters.GetFragmentClassInstance;
 import com.example.rasto.diabetest.Constants.Components;
@@ -19,14 +21,13 @@ public class ActivityHub extends AppCompatActivity implements BasicView, Activit
 
     private ActivityHubPresenter activityHubPresenter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.activityHubPresenter = new ActivityHubPresenter(this);
-       this.activityHubPresenter.stepController(Steps.LOGIN);
+        this.activityHubPresenter.onStart();
+        this.activityHubPresenter.stepController(Steps.LOGIN);
     }
 
     @Override
@@ -37,6 +38,11 @@ public class ActivityHub extends AppCompatActivity implements BasicView, Activit
     @Override
     public void showElement(Components elementType, int id) {
 
+    }
+
+    @Override
+    public View getView() {
+        return null;
     }
 
     @Override

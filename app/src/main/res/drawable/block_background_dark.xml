@@ -5,13 +5,12 @@
             <item>
                 <shape android:shape="rectangle">
                     <padding android:top="2dp" android:bottom="2dp" android:right="2dp" android:left="2dp" />
-                    <gradient android:angle="180.0" android:endColor="#da3581" android:startColor="#882c93" />
+                    <solid android:color="#2a2c3e" />
                     <corners android:radius="16dp"/>
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
-                    <padding android:left="16dp" android:right="16dp"/>
                     <solid android:color="#1d2331" />
                     <corners android:radius="16dp"/>
                 </shape>

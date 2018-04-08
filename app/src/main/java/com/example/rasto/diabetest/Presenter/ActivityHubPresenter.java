@@ -7,12 +7,14 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.rasto.diabetest.Adapters.GetFragmentClassInstance;
+import com.example.rasto.diabetest.Adapters.SwipeController;
 import com.example.rasto.diabetest.Constants.ContainerType;
 import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Steps;
 import com.example.rasto.diabetest.Interfaces.PresenterInterface;
+import com.example.rasto.diabetest.Interfaces.SwipeCallback;
 import com.example.rasto.diabetest.Interfaces.Views.ActivityHubView;
-import com.example.rasto.diabetest.Interfaces.Views.FragmentCallBack;
+import com.example.rasto.diabetest.Interfaces.FragmentCallBack;
 import com.example.rasto.diabetest.Model.ApplicationState;
 
 /**
@@ -34,9 +36,24 @@ public class ActivityHubPresenter implements PresenterInterface, PresenterInterf
 
     @Override
     public void fragmentsCallBack() {
-        for(Fragment fragment: FRAGMENTS) {
-          final FragmentCallBack fragmentCallBack =   (FragmentCallBack) fragment;
-          fragmentCallBack.callBackHandler();
+        switch (APP_STATE.getEventType()) {
+            case CLICK:
+                for(Fragment fragment: FRAGMENTS) {
+                    if (fragment instanceof  FragmentCallBack) {
+                        final FragmentCallBack fragmentCallBack = (FragmentCallBack) fragment;
+                        fragmentCallBack.callBackHandler();
+                    }
+                }
+                break;
+            case SWIPE:
+            case MOVE:
+                for(Fragment fragment: FRAGMENTS) {
+                    if (fragment instanceof SwipeCallback) {
+                        final SwipeCallback swipeCallback = (SwipeCallback) fragment;
+                        swipeCallback.swipeCallBackHandler();
+                    }
+                }
+                break;
         }
     }
 
@@ -113,11 +130,8 @@ public class ActivityHubPresenter implements PresenterInterface, PresenterInterf
     }
 
     @Override
-    public void setSwipeListener(View view) {
-    }
-
-    @Override
     public void onStart() {
+        APP_STATE.setDisplayMetrics(activity.getResources().getDisplayMetrics());
     }
 
     @Override
@@ -133,5 +147,17 @@ public class ActivityHubPresenter implements PresenterInterface, PresenterInterf
     @Override
     public void onDestroy() {
 
+    }
+
+    public void setSwipeListener(final View view) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final GestureDetector swipeController = new GestureDetector(view.getContext(), new SwipeController(Fragments.LOGIN));
+                swipeController.onTouchEvent(event);
+                APP_STATE.getController().startCallBacks();
+                return false;
+            }
+        });
     }
 }

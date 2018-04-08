@@ -1,11 +1,19 @@
 package com.example.rasto.diabetest.Presenter;
 
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableRow;
 
 import com.example.rasto.diabetest.Adapters.FieldValidatorAdapter;
+import com.example.rasto.diabetest.Adapters.SwipeController;
 import com.example.rasto.diabetest.Constants.Components;
+import com.example.rasto.diabetest.Constants.EventDirection;
+import com.example.rasto.diabetest.Constants.EventTypes;
 import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Patterns;
 import com.example.rasto.diabetest.Constants.StatusCode;
@@ -21,7 +29,7 @@ import com.example.rasto.diabetest.R;
  * Created by rasto on 3/4/2018.
  */
 
-public class LoginPresenter extends FieldValidatorAdapter implements TextWatcherCallBack, PresenterInterface, PresenterInterface.ILoginFragment {
+public class LoginPresenter extends FieldValidatorAdapter implements PresenterInterface, PresenterInterface.ILoginFragment {
 
     private ILoginView loginView;
     private IInteractor.ILogin login;
@@ -86,15 +94,26 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
         tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (APP_STATE.getCurrentActiveFragment()) {
-                    case LOGIN:
-                        APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                switch (APP_STATE.getEventType()) {
+                    case SWIPE:
+                        if (APP_STATE.getEventDirection() == EventDirection.TOP) {
+                            APP_STATE.setCurrentActiveFragment(Fragments.LOGIN);
+                        } else {
+                            APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                        }
+                        APP_STATE.setEventType(EventTypes.CLICK);
                         break;
-                    default:
-                        APP_STATE.setCurrentActiveFragment(Fragments.LOGIN);
+                    case CLICK:
+                    case NULL:
+                        APP_STATE.setEventType(EventTypes.CLICK);
+                        if (APP_STATE.getCurrentActiveFragment() == Fragments.LOGIN) {
+                            APP_STATE.setCurrentActiveFragment(Fragments.NULL);
+                        } else {
+                            APP_STATE.setCurrentActiveFragment(Fragments.LOGIN);
+                        }
+                        APP_STATE.getController().startCallBacks();
                         break;
                 }
-                APP_STATE.getController().startCallBacks();
             }
         });
     }
@@ -129,6 +148,7 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
 
     @Override
     public void onStart() {
+        loginView.getView().setY(APP_STATE.getDisplayMetrics().heightPixels - 160 * APP_STATE.getDisplayMetrics().density);
     }
 
     @Override
@@ -167,5 +187,36 @@ public class LoginPresenter extends FieldValidatorAdapter implements TextWatcher
     @Override
     public boolean isFragmentActive() {
         return APP_STATE.getCurrentActiveFragment() == Fragments.LOGIN;
+    }
+
+    @Override
+    public void setSwipeListener(final View view) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final GestureDetector swipeController = new GestureDetector(view.getContext(), new SwipeController(Fragments.LOGIN));
+                swipeController.onTouchEvent(event);
+                if (event.getHistorySize() > 0 && event.getAction() == MotionEvent.ACTION_MOVE) {
+                    APP_STATE.setEventType(EventTypes.SWIPE);
+                    if (event.getHistoricalAxisValue(1, 0) - event.getHistoricalAxisValue(1, event.getHistorySize() - 1) > 0) {
+                        APP_STATE.setEventDirection(EventDirection.TOP);
+                    } else APP_STATE.setEventDirection(EventDirection.DOWN);
+                    for (int index = 0; index < event.getHistorySize(); index++) {
+                        if (index > 0) {
+                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index - 1), event.getHistoricalAxisValue(1, index - 1));
+                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                        } else {
+                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
+                        }
+                        APP_STATE.getController().startCallBacks();
+                    }
+                    APP_STATE.setLastPoint(0f, 0f);
+                    APP_STATE.setCurrentPoint(0f, 0f);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }

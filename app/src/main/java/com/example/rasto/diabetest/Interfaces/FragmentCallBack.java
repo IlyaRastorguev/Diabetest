@@ -1,4 +1,4 @@
-package com.example.rasto.diabetest.Interfaces.Views;
+package com.example.rasto.diabetest.Interfaces;
 
 /**
  * Created by irastorguev on 24.03.2018.

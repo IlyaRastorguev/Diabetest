@@ -1,6 +1,12 @@
 package com.example.rasto.diabetest.Model;
 
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
+
+import com.example.rasto.diabetest.Constants.Axis;
 import com.example.rasto.diabetest.Constants.ContainerType;
+import com.example.rasto.diabetest.Constants.EventDirection;
+import com.example.rasto.diabetest.Constants.EventTypes;
 import com.example.rasto.diabetest.Constants.Fragments;
 import com.example.rasto.diabetest.Constants.Steps;
 import com.example.rasto.diabetest.Interfaces.Views.ActivityHubView;
@@ -14,6 +20,14 @@ public class ApplicationState {
     private static ApplicationState instance;
 
     private Fragments currentActiveFragment;
+
+    private EventTypes eventType = EventTypes.NULL;
+    private EventDirection eventDirection = EventDirection.NULL;
+
+    private Axis lastPoint = Axis.LAST;
+    private Axis currentPoint = Axis.CURRENT;
+
+    private DisplayMetrics displayMetrics;
 
     private Steps currentAppStep;
 
@@ -34,6 +48,7 @@ public class ApplicationState {
     private ApplicationState() {
         this.currentActiveFragment = Fragments.NULL;
         this.currentAppStep = Steps.NULL;
+        this.eventType = EventTypes.NULL;
     }
 
     public static synchronized ApplicationState getInstance() {
@@ -145,5 +160,47 @@ public class ApplicationState {
 
     public void setController(ActivityHubView controller) {
         this.controller = controller;
+    }
+
+    public EventTypes getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventTypes eventType) {
+        this.eventType = eventType;
+    }
+
+    public Axis getLastPoint() {
+        return lastPoint;
+    }
+
+    public void setLastPoint(float x, float y) {
+        this.lastPoint.setX(x);
+        this.lastPoint.setY(y);
+    }
+
+    public Axis getCurrentPoint() {
+        return currentPoint;
+    }
+
+    public void setCurrentPoint(float x, float y) {
+        this.currentPoint.setX(x);
+        this.currentPoint.setY(y);
+    }
+
+    public EventDirection getEventDirection() {
+        return eventDirection;
+    }
+
+    public void setEventDirection(EventDirection eventDirection) {
+        this.eventDirection = eventDirection;
+    }
+
+    public DisplayMetrics getDisplayMetrics() {
+        return displayMetrics;
+    }
+
+    public void setDisplayMetrics(DisplayMetrics displayMetrics) {
+        this.displayMetrics = displayMetrics;
     }
 }

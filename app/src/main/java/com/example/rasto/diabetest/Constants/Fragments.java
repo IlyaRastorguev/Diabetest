@@ -11,6 +11,7 @@ public enum Fragments {
     NULL(0, null),
     TOP_BAR(R.layout.top_bar_fragment, Containers.TOP),
     LOGIN(R.layout.login_fragment, Containers.MAIN),
+    SING_UP_IMAGE(R.layout.sing_in_login_image, Containers.MAIN),
     SING_UP(R.layout.sing_up_fragment, Containers.MAIN);
 
     private int fragmentId;

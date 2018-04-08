@@ -1,5 +1,7 @@
 package com.example.rasto.diabetest.Interfaces.Views;
 
+import android.view.View;
+
 import com.example.rasto.diabetest.Constants.Components;
 import com.example.rasto.diabetest.Constants.Containers;
 import com.example.rasto.diabetest.Constants.Fragments;
@@ -13,5 +15,7 @@ public interface BasicView {
     void hideElement(Components elementType, int id);
 
     void showElement(Components elementType, int id);
+
+    View getView();
 
 }
