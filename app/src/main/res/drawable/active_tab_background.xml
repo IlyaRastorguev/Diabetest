@@ -4,7 +4,6 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <padding android:top="1dp" android:right="1dp" android:left="1dp" />
                     <gradient android:angle="180.0" android:endColor="#da3581" android:startColor="#882c93" />
                     <corners android:radius="16dp"/>
                 </shape>
