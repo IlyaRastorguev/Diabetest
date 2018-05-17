@@ -132,13 +132,16 @@ public class LoginFragment extends Fragment implements ILoginView, FragmentCallB
     public void callBackHandler() {
         switch (APP_STATE.getCurrentActiveFragment()) {
             case LOGIN:
-                view.setTranslationY(0);
+                view.findViewById(R.id.active_part).setVisibility(View.VISIBLE);
+                view.setY(64*APP_STATE.getDisplayMetrics().density);
                 break;
             case SING_UP:
-                view.setTranslationY(APP_STATE.getDisplayMetrics().heightPixels - 96 * APP_STATE.getDisplayMetrics().density);
+                view.findViewById(R.id.active_part).setVisibility(View.GONE);
+                view.setVisibility(View.GONE);
                 break;
             case NULL:
-                view.setTranslationY(APP_STATE.getDisplayMetrics().heightPixels - 160 * APP_STATE.getDisplayMetrics().density);
+                view.findViewById(R.id.active_part).setVisibility(View.GONE);
+                view.setY(APP_STATE.getDisplayMetrics().heightPixels - 256 * APP_STATE.getDisplayMetrics().density);
                 break;
         }
     }
@@ -147,38 +150,8 @@ public class LoginFragment extends Fragment implements ILoginView, FragmentCallB
     public void swipeCallBackHandler() {
         switch (APP_STATE.getCurrentActiveFragment()) {
             case LOGIN:
-                if (APP_STATE.getLastPoint() != null && APP_STATE.getCurrentPoint() != null) {
-                    final float moveDistance = Math.abs(APP_STATE.getLastPoint().getY() - APP_STATE.getCurrentPoint().getY());
-                    switch (APP_STATE.getEventDirection()) {
-                        case TOP:
-                            if ((APP_STATE.getDisplayMetrics().heightPixels - (Math.round(view.getY() - moveDistance * 2))) / APP_STATE.getDisplayMetrics().density > 320) {
-                                view.setTranslationY(0);
-                            } else view.setTranslationY(Math.round(view.getY() - moveDistance * 2));
-                            break;
-                        case DOWN:
-                            if ((APP_STATE.getDisplayMetrics().heightPixels - (Math.round(view.getY() + moveDistance * 2))) / APP_STATE.getDisplayMetrics().density < 320) {
-                                view.setTranslationY(APP_STATE.getDisplayMetrics().heightPixels - 160 * APP_STATE.getDisplayMetrics().density);
-                            } else view.setTranslationY(Math.round(view.getY() + moveDistance * 2));
-                            break;
-                    }
-                }
                 break;
             case SING_UP:
-                if (APP_STATE.getLastPoint() != null && APP_STATE.getCurrentPoint() != null) {
-                    final float moveDistance = Math.abs(APP_STATE.getLastPoint().getY() - APP_STATE.getCurrentPoint().getY());
-                    switch (APP_STATE.getEventDirection()) {
-                        case TOP:
-                            if ((APP_STATE.getDisplayMetrics().heightPixels - (Math.round(view.getY() + moveDistance * 2))) / APP_STATE.getDisplayMetrics().density < 320) {
-                                view.setTranslationY(APP_STATE.getDisplayMetrics().heightPixels - 96 * APP_STATE.getDisplayMetrics().density);
-                            } else view.setY(Math.round(view.getY() + moveDistance * 2));
-                            break;
-                        case DOWN:
-                            if ((APP_STATE.getDisplayMetrics().heightPixels - (Math.round(view.getY() - moveDistance * 2))) / APP_STATE.getDisplayMetrics().density > 160) {
-                                view.setTranslationY(APP_STATE.getDisplayMetrics().heightPixels - 160 * APP_STATE.getDisplayMetrics().density);
-                            } else  view.setY(Math.round(view.getY() - moveDistance * 2));
-                            break;
-                    }
-                }
                 break;
         }
     }

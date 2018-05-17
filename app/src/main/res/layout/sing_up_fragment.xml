@@ -3,13 +3,14 @@
     android:id="@+id/sing_up_block"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:layout_marginBottom="72dp">
+    android:layout_marginTop="64dp"
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/main_block_background"
+        android:padding="16dp"
+        android:background="?attr/active_tab_background"
         android:orientation="vertical">
 
         <Button
@@ -17,7 +18,7 @@
             android:id="@+id/sing_up_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/active_tab_background"
+            android:background="?attr/transparent_button"
             android:fontFamily="?attr/main_font"
             android:paddingEnd="8dp"
             android:paddingLeft="24dp"
@@ -28,14 +29,15 @@
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryWhite"
-            android:textSize="36sp" />
+            android:textSize="40sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/active_part"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/main_block_background"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -197,7 +199,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryWhite" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

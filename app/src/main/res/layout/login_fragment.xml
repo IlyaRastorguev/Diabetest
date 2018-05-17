@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:layout_marginBottom="72dp">
+    android:layout_marginTop="64dp"
+    android:padding="8dp">
 
     <LinearLayout
         android:id="@+id/login_block"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/main_block_background"
-        android:orientation="vertical">
+        android:background="?attr/active_tab_background"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <Button
-            android:elevation="2dp"
             android:id="@+id/login_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/active_tab_background"
+            android:layout_height="56dp"
+            android:background="?attr/transparent_button"
+            android:elevation="2dp"
             android:fontFamily="?attr/main_font"
             android:gravity="center|start"
             android:paddingEnd="8dp"
@@ -28,14 +30,15 @@
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryWhite"
-            android:textSize="36sp" />
+            android:textSize="40sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/active_part"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/main_block_background"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -44,8 +47,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
 
                     <EditText
                         android:id="@+id/email"
@@ -106,8 +109,22 @@
                     android:textColor="@color/colorPrimaryWhite" />
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="257dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="80dp" />
 
 </android.support.constraint.ConstraintLayout>

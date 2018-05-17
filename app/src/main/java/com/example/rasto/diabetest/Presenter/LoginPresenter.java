@@ -148,7 +148,7 @@ public class LoginPresenter extends FieldValidatorAdapter implements PresenterIn
 
     @Override
     public void onStart() {
-        loginView.getView().setY(APP_STATE.getDisplayMetrics().heightPixels - 160 * APP_STATE.getDisplayMetrics().density);
+        loginView.getView().setY(APP_STATE.getDisplayMetrics().heightPixels - 256 * APP_STATE.getDisplayMetrics().density);
     }
 
     @Override
@@ -191,32 +191,5 @@ public class LoginPresenter extends FieldValidatorAdapter implements PresenterIn
 
     @Override
     public void setSwipeListener(final View view) {
-        view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final GestureDetector swipeController = new GestureDetector(view.getContext(), new SwipeController(Fragments.LOGIN));
-                swipeController.onTouchEvent(event);
-                if (event.getHistorySize() > 0 && event.getAction() == MotionEvent.ACTION_MOVE) {
-                    APP_STATE.setEventType(EventTypes.SWIPE);
-                    if (event.getHistoricalAxisValue(1, 0) - event.getHistoricalAxisValue(1, event.getHistorySize() - 1) > 0) {
-                        APP_STATE.setEventDirection(EventDirection.TOP);
-                    } else APP_STATE.setEventDirection(EventDirection.DOWN);
-                    for (int index = 0; index < event.getHistorySize(); index++) {
-                        if (index > 0) {
-                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index - 1), event.getHistoricalAxisValue(1, index - 1));
-                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
-                        } else {
-                            APP_STATE.setLastPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
-                            APP_STATE.setCurrentPoint(event.getHistoricalAxisValue(0, index), event.getHistoricalAxisValue(1, index));
-                        }
-                        APP_STATE.getController().startCallBacks();
-                    }
-                    APP_STATE.setLastPoint(0f, 0f);
-                    APP_STATE.setCurrentPoint(0f, 0f);
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 }
