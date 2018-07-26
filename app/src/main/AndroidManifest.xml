@@ -5,15 +5,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_diabetest_launcher"
-        android:label="@string/app_name"
+        android:label="Test"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeDark">
+    >
         <activity
             android:name=".Views.ActivityHub"
             android:windowSoftInputMode="stateVisible|adjustPan"
-            android:label="@string/app_name"
-            android:theme="@style/AppThemeDark">
+            android:label="Test"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

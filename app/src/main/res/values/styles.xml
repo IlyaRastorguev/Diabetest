@@ -11,27 +11,6 @@
     <attr name="main_semi_transparent_block" format="reference"/>
     <attr name="active_tab_background" format="reference"/>
     <!-- Base application theme. -->
-    <style name="AppThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor" tools:targetApi="21">@color/colorPrimaryDark</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="main_font">@font/comfortaa</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="active_tab_background">@drawable/active_tab_background</item>
-        <item name="main_semi_transparent_block">@drawable/block_semi_transparent</item>
-        <item name="main_background">@drawable/app_background_dark</item>
-        <item name="main_button_background">@drawable/button_background</item>
-        <item name="main_input_background">@drawable/input_background</item>
-        <item name="main_circle_background">@drawable/circle_background</item>
-        <item name="main_block_background">@drawable/block_background_dark</item>
-        <item name="main_text_field_background">@drawable/text_field_background</item>
-        <item name="main_app_bar_background">@drawable/app_bar_background</item>
-        <item name="transparent_button">@drawable/transparent_button_background</item>
-    </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
