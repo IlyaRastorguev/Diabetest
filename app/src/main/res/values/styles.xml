@@ -13,4 +13,5 @@
     <!-- Base application theme. -->
 
 
+    <style name="diabetest_main_theme" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>
