@@ -4,14 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_diabetest_launcher"
         android:label="Test"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
     >
         <activity
-            android:name=".Views.ActivityHub"
+            android:name=".views.MainActivity"
             android:windowSoftInputMode="stateVisible|adjustPan"
+            android:theme="@style/diabetest_main_theme"
             android:label="Test"
         >
             <intent-filter>
