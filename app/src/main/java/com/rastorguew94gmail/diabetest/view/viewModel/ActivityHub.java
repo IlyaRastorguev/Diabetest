@@ -1,8 +1,10 @@
-package com.rastorguew94gmail.diabetest;
+package com.rastorguew94gmail.diabetest.view.viewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.rastorguew94gmail.diabetest.R;
 
 public class ActivityHub extends AppCompatActivity {
 
