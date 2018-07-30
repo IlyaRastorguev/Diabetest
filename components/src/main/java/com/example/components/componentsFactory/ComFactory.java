@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ComFactory<T> {
 
-    ComponentProperties<T> componentProperties = new ComponentProperties<T>();
+    ComponentProperties<T> componentProperties = new ComponentProperties<>();
 
     public ComFactory<T> setTextValue(String value) {
         componentProperties.setTextValue(value);
