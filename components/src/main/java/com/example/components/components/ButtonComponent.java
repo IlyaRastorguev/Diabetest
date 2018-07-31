@@ -1,4 +1,4 @@
 package com.example.components.components;
 
-public class ButtonComponent {
+public class ButtonComponent extends BasicLayoutFragment {
 }

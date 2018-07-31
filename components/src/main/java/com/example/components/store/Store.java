@@ -21,7 +21,7 @@ public class Store {
         return componentPropertiesMap;
     }
 
-    public <T> void setComponentPropertiesMap(Integer componentId, ComponentProperties<T> componentProperties) {
+    public void setComponentPropertiesMap(Integer componentId, ComponentProperties componentProperties) {
         componentPropertiesMap.put(componentId, componentProperties);
     }
 }

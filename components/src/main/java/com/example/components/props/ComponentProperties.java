@@ -1,13 +1,17 @@
 package com.example.components.props;
 
+import android.view.View;
+
 import com.example.components.interfaces.Action;
 import com.example.components.interfaces.Subscriber;
 
 import java.util.List;
 
-public class ComponentProperties<T> {
+public class ComponentProperties {
 
-    private T component;
+    private View component;
+
+    private Class componentClass;
 
     private String textValue;
 
@@ -29,11 +33,11 @@ public class ComponentProperties<T> {
 
     private String eventType;
 
-    public T getComponent() {
+    public View getComponent() {
         return component;
     }
 
-    public void setComponent(T component) {
+    public void setComponent(View component) {
         this.component = component;
     }
 
@@ -115,5 +119,13 @@ public class ComponentProperties<T> {
 
     public void setEventType(String eventType) {
         this.eventType = eventType;
+    }
+
+    public Class getComponentClass() {
+        return componentClass;
+    }
+
+    public void setComponentClass(Class componentClass) {
+        this.componentClass = componentClass;
     }
 }
