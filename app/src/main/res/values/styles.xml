@@ -8,8 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="DiabetestLightTheme" parent="AppTheme" >
+    <style name="DiabetestLightTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:navigationBarColor">@color/transparent_color</item>
     </style>
 

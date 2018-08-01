@@ -33,6 +33,8 @@ public class ComponentProperties {
 
     private String eventType;
 
+    private int visibility;
+
     public View getComponent() {
         return component;
     }
@@ -127,5 +129,13 @@ public class ComponentProperties {
 
     public void setComponentClass(Class componentClass) {
         this.componentClass = componentClass;
+    }
+
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
     }
 }
