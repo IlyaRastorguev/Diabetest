@@ -2,6 +2,7 @@ package com.example.components.components;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +16,6 @@ public class BasicLayoutFragment extends Fragment {
 
     private View view;
 
-    private void findComponents(ViewGroup viewGroup) {
-        viewGroup.getChildCount();
-        for (int i = 0; i <= viewGroup.getChildCount(); i++) {
-            View view = viewGroup.getChildAt(i);
-            initComponent(view);
-        }
-    }
-
-    private void initComponent(View view) {
-
-    }
-
     private void findView(LayoutInflater inflater, ViewGroup container) {
     }
 
@@ -39,7 +28,6 @@ public class BasicLayoutFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         findView(inflater, container);
-        findComponents((ViewGroup) view);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

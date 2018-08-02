@@ -1,6 +1,12 @@
 package com.example.components.interfaces;
 
-public @interface Screen {
-    public String value() default "";
+import androidx.fragment.app.Fragment;
 
+public interface Screen {
+
+    Fragment getScreen();
+
+    void setCurrentState();
+
+    String getCurrentState();
 }
