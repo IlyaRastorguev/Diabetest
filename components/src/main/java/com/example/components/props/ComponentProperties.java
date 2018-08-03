@@ -35,6 +35,8 @@ public class ComponentProperties {
 
     private int visibility;
 
+    private Boolean needFocus = false;
+
     public View getComponent() {
         return component;
     }
@@ -73,14 +75,6 @@ public class ComponentProperties {
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public Action getAction() {
-        return action;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
     }
 
     public List<Subscriber> getSubscribers() {
@@ -137,5 +131,21 @@ public class ComponentProperties {
 
     public void setVisibility(int visibility) {
         this.visibility = visibility;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Boolean getNeedFocus() {
+        return needFocus;
+    }
+
+    public void setNeedFocus(Boolean needFocus) {
+        this.needFocus = needFocus;
     }
 }

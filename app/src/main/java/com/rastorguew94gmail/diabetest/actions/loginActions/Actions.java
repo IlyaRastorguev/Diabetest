@@ -3,31 +3,50 @@ package com.rastorguew94gmail.diabetest.actions.loginActions;
 import com.example.components.interfaces.Action;
 import com.example.components.interfaces.ScreenComponent;
 import com.example.components.interfaces.ScreenState;
-import com.rastorguew94gmail.diabetest.actions.Status;
 
-public class Actions implements Action {
+public class Actions implements com.example.components.interfaces.Actions {
 
-    @ScreenState("LOGIN")
-    @ScreenComponent("login_action")
-    public Status logInAction() {
-        return Status.OK;
+    @ScreenState(value = "LOGIN")
+    @ScreenComponent(value = "login_action_button")
+    public Action  logInAction() {
+       return new Action() {
+           @Override
+           public void doAction() {
+
+           }
+       };
     }
 
-    @ScreenState("SING_UP")
-    @ScreenComponent("login_action")
-    public Status singUpAction() {
-        return Status.OK;
+    @ScreenState(value = "SING_UP")
+    @ScreenComponent(value = "login_action_button")
+    public Action singUpAction() {
+       return new Action() {
+           @Override
+           public void doAction() {
+
+           }
+       };
     }
 
-    @ScreenState("START")
-    @ScreenComponent("login_action")
-    public void goToLogin() {
+    @ScreenState(value = "START")
+    @ScreenComponent(value = "login_action_button")
+    public Action goToLogin() {
+        return new Action() {
+            @Override
+            public void doAction() {
 
+            }
+        };
     }
 
-    @ScreenState("START")
-    @ScreenComponent("login_options_action")
-    public void goToSingUp() {
+    @ScreenState(value = "START")
+    @ScreenComponent(value = "login_options_button")
+    public Action goToSingUp() {
+        return new Action() {
+            @Override
+            public void doAction() {
 
+            }
+        };
     }
 }

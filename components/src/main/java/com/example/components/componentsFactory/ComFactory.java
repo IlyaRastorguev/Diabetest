@@ -16,12 +16,22 @@ import java.util.List;
 
 public class ComFactory{
 
-    public ComFactory(View component) {
-        this.componentProperties = new ComponentProperties();
-        componentProperties.setComponent(component);
-    }
+    private static final ComFactory COM_FACTORY = new ComFactory();
 
     private ComponentProperties componentProperties;
+
+    private ComFactory() {
+
+    }
+
+    public static ComFactory get() {
+        return COM_FACTORY;
+    }
+
+    public ComFactory setView(View view) {
+        return this;
+    }
+
 
     public ComFactory setTextValue(String value) {
         componentProperties.setTextValue(value);
@@ -44,8 +54,13 @@ public class ComFactory{
         return this;
     }
 
-    public ComFactory setAction(Action action) {
-        componentProperties.setAction(action);
+    public ComFactory setAction(Object action) {
+        componentProperties.setAction((Action) action);
+        return this;
+    }
+
+    public ComFactory setVisibility(int visibility) {
+        componentProperties.setVisibility(visibility);
         return this;
     }
 
@@ -70,6 +85,11 @@ public class ComFactory{
         return this;
     }
 
+    public ComFactory setNeedFocus(Boolean needFocus) {
+        componentProperties.setNeedFocus(needFocus);
+        return this;
+    }
+
     public ComFactory findType() {
         View component = componentProperties.getComponent();
         if (component instanceof Button) {
@@ -91,5 +111,6 @@ public class ComFactory{
             componentProperties.setLayoutId(componentId);
             Store.getInstance().setComponentPropertiesMap(componentId, componentProperties);
         }
+        componentProperties = null;
    }
 }
